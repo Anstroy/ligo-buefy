@@ -19,18 +19,35 @@
     <div class="columns">
       <!-- LEFT -->
       <div class="column">
-        <div class="card card-content">
-          <h3 class="title is-4">Reto 1</h3>
+        <div
+          @click="retoClick(reto)"
+          v-for="reto in retos"
+          :key="reto.id"
+          class="card mb-3"
+        >
+          <div class="card-content">
+            <h3 class="title is-4">{{ reto.title }}</h3>
+          </div>
         </div>
       </div>
 
       <!-- RIGHT -->
-      <div class="column"></div>
+      <div class="column is-relative">
+        <div style="position: sticky; top: 0">
+          <div class="card mt-6">
+            <div class="card-content">
+              <h3 class="title is-4">{{ reto.title }}</h3>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
 </template>
 
 <script>
+const retos = require('~/data/retos')
+
 export default {
   data: () => ({
     data: [
@@ -49,7 +66,15 @@ export default {
     ],
     name: '',
     selected: null,
+    retos,
+    reto: Object,
   }),
+
+  methods: {
+    retoClick(e) {
+      this.reto = e
+    },
+  },
 
   computed: {
     filteredDataArray() {
