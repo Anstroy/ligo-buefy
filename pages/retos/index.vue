@@ -23,7 +23,7 @@
           @click="retoClick(reto)"
           v-for="reto in retos"
           :key="reto.id"
-          class="card mb-3"
+          class="card mb-3 cursor-pointer"
         >
           <div class="card-content">
             <h3 class="title is-4">{{ reto.title }}</h3>
@@ -33,10 +33,25 @@
 
       <!-- RIGHT -->
       <div class="column is-relative">
-        <div style="position: sticky; top: 0">
-          <div class="card mt-6">
+        <div class="is-sticky" style="top: 0">
+          <div class="card mt-6" v-if="reto">
             <div class="card-content">
               <h3 class="title is-4">{{ reto.title }}</h3>
+              <p>{{ reto.description }}</p>
+              <br />
+              <b-taglist attached>
+                <b-tag type="is-dark"><i class="bx bx-user"></i></b-tag>
+                <b-tag type="is-info">{{ findPublisher.name }}</b-tag>
+              </b-taglist>
+              <br />
+              <b-taglist>
+                <b-tag
+                  type="is-info"
+                  v-for="(cat, i) in filterCategories"
+                  :key="i"
+                  >{{ cat.title }}</b-tag
+                >
+              </b-taglist>
             </div>
           </div>
         </div>
@@ -47,6 +62,8 @@
 
 <script>
 const retos = require('~/data/retos')
+const categories = require('~/data/categories')
+const profiles = require('~/data/profiles')
 
 export default {
   data: () => ({
@@ -67,7 +84,7 @@ export default {
     name: '',
     selected: null,
     retos,
-    reto: Object,
+    reto: null,
   }),
 
   methods: {
@@ -77,6 +94,14 @@ export default {
   },
 
   computed: {
+    findPublisher() {
+      return profiles.find((x) => x.id === this.reto.publisher)
+    },
+
+    filterCategories() {
+      return this.reto.categories.map((c) => categories.find((x) => x.id === c))
+    },
+
     filteredDataArray() {
       return this.data.filter((option) => {
         return (
