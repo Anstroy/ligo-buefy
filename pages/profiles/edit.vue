@@ -2,7 +2,6 @@
   <b-tabs v-model="activeTab" position="is-centered">
     <template v-for="tab in tabs">
       <b-tab-item
-        @click="propertyClick(property)"
         v-if="tab.displayed"
         :key="tab.id"
         :value="tab.id"
@@ -10,8 +9,13 @@
       >
         <div class="columns">
           <div class="column">
-            <div class="box">
-              {{ tab.content }}
+            <div
+              @click="propertyClick(property)"
+              v-for="property in especializaciones"
+              :key="property.id"
+              class="box"
+            >
+              {{ property.title }}
             </div>
           </div>
         </div>
@@ -29,7 +33,8 @@ const especializaciones = require('~/data/especializaciones')
 
 export default {
   data: () => ({
-    property: 0,
+    especializaciones,
+    property: null,
   }),
 
   methods: {
