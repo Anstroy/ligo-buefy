@@ -15,6 +15,10 @@ export default {
       },
       {
         rel: 'stylesheet',
+        href: '/styles/bulma-helpers.css',
+      },
+      {
+        rel: 'stylesheet',
         href:
           'https://cdn.jsdelivr.net/npm/boxicons@2.0.5/css/boxicons.min.css',
       },

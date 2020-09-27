@@ -16,17 +16,56 @@
         </b-autocomplete>
       </b-field>
     </section>
+    <br />
     <div class="columns">
       <!-- LEFT -->
       <div class="column">
         <div
-          @click="retoClick(reto)"
-          v-for="reto in retos"
-          :key="reto.id"
-          class="card mb-3 cursor-pointer"
+          v-for="r in retos"
+          :key="r.id"
+          @click="retoClick(r)"
+          class="mb-3 cursor-pointer"
         >
-          <div class="card-content">
-            <h3 class="title is-4">{{ reto.title }}</h3>
+          <div class="box">
+            <article class="media">
+              <div class="media-left">
+                <figure class="image is-64x64">
+                  <img
+                    src="https://bulma.io/images/placeholders/128x128.png"
+                    alt="Image"
+                  />
+                </figure>
+              </div>
+              <div class="media-content">
+                <div class="content">
+                  <p>
+                    <strong>{{ r.title }}</strong>
+                    <small>31m</small>
+                    <br />
+                    {{ r.description }}
+                  </p>
+                </div>
+                <nav class="level is-mobile">
+                  <div class="level-left">
+                    <a class="level-item" aria-label="reply">
+                      <span class="icon is-small">
+                        <i class="fas fa-reply" aria-hidden="true"></i>
+                      </span>
+                    </a>
+                    <a class="level-item" aria-label="retweet">
+                      <span class="icon is-small">
+                        <i class="fas fa-retweet" aria-hidden="true"></i>
+                      </span>
+                    </a>
+                    <a class="level-item" aria-label="like">
+                      <span class="icon is-small">
+                        <i class="fas fa-heart" aria-hidden="true"></i>
+                      </span>
+                    </a>
+                  </div>
+                </nav>
+              </div>
+            </article>
           </div>
         </div>
       </div>
@@ -34,13 +73,12 @@
       <!-- RIGHT -->
       <div class="column is-relative">
         <div class="is-sticky" style="top: 0">
-          <div class="card mt-6" v-if="reto">
+          <div class="card mt-6" v-if="reto !== null">
             <div class="card-content">
               <h3 class="title is-4">{{ reto.title }}</h3>
               <p>{{ reto.description }}</p>
               <br />
               <b-navbar-item
-                active="true"
                 tag="router-link"
                 :to="{ path: '/profiles/' + findPublisher.slug }"
               >
@@ -67,11 +105,11 @@
 </template>
 
 <script>
-const retos = require('~/data/retos')
 const categories = require('~/data/categories')
 const profiles = require('~/data/profiles')
 
 export default {
+  props: ['retos'],
   data: () => ({
     data: [
       'Angular',
@@ -89,7 +127,6 @@ export default {
     ],
     name: '',
     selected: null,
-    retos,
     reto: null,
   }),
 
@@ -102,6 +139,7 @@ export default {
   computed: {
     findPublisher() {
       return profiles.find((x) => x.id === this.reto.publisher)
+      //   return profiles.find((x) => x.id === 1)
     },
 
     filterCategories() {

@@ -32,8 +32,16 @@ let retos = [
     publisher: 1,
   },
   {
-    id: 3,
-    title: 'Reto 3',
+    id: 4,
+    title: 'Reto 4',
+    description:
+      'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Justo donec enim diam vulputate ut pharetra sit amet. Consectetur purus ut faucibus pulvinar elementum integer.',
+    categories: [3, 0],
+    publisher: 1,
+  },
+  {
+    id: 5,
+    title: 'Reto Nuevo para Nes',
     description:
       'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Justo donec enim diam vulputate ut pharetra sit amet. Consectetur purus ut faucibus pulvinar elementum integer.',
     categories: [3, 0],
