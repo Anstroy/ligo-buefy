@@ -1,77 +1,19 @@
 <template>
   <div>
-    <section>
-      <p class="content"><b>Selected:</b> {{ selected }}</p>
-      <b-field label="Find a JS framework">
-        <b-autocomplete
-          rounded
-          v-model="name"
-          :data="filteredDataArray"
-          placeholder="e.g. jQuery"
-          icon="magnify"
-          clearable
-          @select="(option) => (selected = option)"
-        >
-          <template slot="empty">No results found</template>
-        </b-autocomplete>
-      </b-field>
-    </section>
-    <div class="columns">
-      <!-- LEFT -->
-      <div class="column">
-        <div
-          @click="retoClick(reto)"
-          v-for="reto in retos"
-          :key="reto.id"
-          class="card mb-3 cursor-pointer"
-        >
-          <div class="card-content">
-            <h3 class="title is-4">{{ reto.title }}</h3>
-          </div>
-        </div>
-      </div>
-
-      <!-- RIGHT -->
-      <div class="column is-relative">
-        <div class="is-sticky" style="top: 0">
-          <div class="card mt-6" v-if="reto">
-            <div class="card-content">
-              <h3 class="title is-4">{{ reto.title }}</h3>
-              <p>{{ reto.description }}</p>
-              <br />
-              <b-navbar-item
-                active="true"
-                tag="router-link"
-                :to="{ path: '/profiles/' + findPublisher.slug }"
-              >
-                <b-taglist attached>
-                  <b-tag type="is-dark"><i class="bx bx-user"></i></b-tag>
-                  <b-tag type="is-info">{{ findPublisher.name }}</b-tag>
-                </b-taglist>
-              </b-navbar-item>
-              <br />
-              <b-taglist>
-                <b-tag
-                  type="is-info"
-                  v-for="(cat, i) in filterCategories"
-                  :key="i"
-                  >{{ cat.title }}</b-tag
-                >
-              </b-taglist>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
+    <RetosView :retos="retos" />
   </div>
 </template>
 
 <script>
+import RetosView from '@/components/Retos'
 const retos = require('~/data/retos')
 const categories = require('~/data/categories')
 const profiles = require('~/data/profiles')
 
 export default {
+  components: {
+    RetosView,
+  },
   data: () => ({
     data: [
       'Angular',

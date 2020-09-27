@@ -81,7 +81,13 @@
               </div>
             </div>
             <div class="column">
-              <BoxComponent :title="`hey`" :text="`hey`" />
+              <BoxComponent
+                v-for="post in posts"
+                :key="post.id"
+                :title="profile.name"
+                :slug="profile.slug"
+                :text="post.text"
+              />
             </div>
           </div>
         </b-tab-item>
@@ -108,6 +114,7 @@ import RetosComponent from '@/components/Retos'
 import BoxComponent from '@/components/Bulma/box'
 
 import retos from '@/data/retos'
+import posts from '@/data/posts'
 
 export default {
   components: {
@@ -117,10 +124,11 @@ export default {
   props: ['profile'],
   data: () => ({
     retos: retos.reverse(),
+    posts,
   }),
   created() {
     this.retos = retos.filter((r) => r.publisher === this.profile.id)
-    console.log(retos)
+    this.posts = posts.filter((p) => p.profile === this.profile.id)
   },
 }
 </script>

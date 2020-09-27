@@ -3,7 +3,7 @@
     <template slot="brand">
       <b-navbar-item tag="router-link" :to="{ path: '/' }">
         <img
-          src="https://raw.githubusercontent.com/buefy/buefy/dev/static/img/buefy-logo.png"
+          src="/images/ligo.png"
           alt="Lightweight UI components for Vue.js based on Bulma"
         />
       </b-navbar-item>
@@ -22,10 +22,20 @@
     <template slot="end">
       <b-navbar-item tag="div">
         <div class="buttons">
-          <a class="button is-primary">
+          <b-button
+            tag="router-link"
+            :to="{ path: '/auth/register' }"
+            type="is-primary"
+          >
             <strong>Sign up</strong>
-          </a>
-          <a class="button is-light"> Log in </a>
+          </b-button>
+          <b-button
+            tag="router-link"
+            :to="{ path: '/auth/login' }"
+            type="is-light"
+          >
+            Log in
+          </b-button>
         </div>
       </b-navbar-item>
     </template>

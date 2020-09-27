@@ -14,7 +14,7 @@
       <div class="media-content">
         <div class="content">
           <p>
-            <strong>{{ title }}</strong> <small>@johnsmith</small>
+            <strong>{{ title }}</strong> <small>@{{ slug }}</small>
             <small>31m</small>
             <br />
             {{ text }}
@@ -24,17 +24,17 @@
           <div class="level-left">
             <a class="level-item" aria-label="reply">
               <span class="icon is-small">
-                <i class="fas fa-reply" aria-hidden="true"></i>
+                <i class="bx bx-reply"></i>
               </span>
             </a>
             <a class="level-item" aria-label="retweet">
               <span class="icon is-small">
-                <i class="fas fa-retweet" aria-hidden="true"></i>
+                <i class="bx bx-repost"></i>
               </span>
             </a>
             <a class="level-item" aria-label="like">
               <span class="icon is-small">
-                <i class="fas fa-heart" aria-hidden="true"></i>
+                <i class="bx bxs-heart"></i>
               </span>
             </a>
           </div>
@@ -46,7 +46,10 @@
 
 <script>
 export default {
-  props: ['image', 'title', 'text'],
+  props: ['image', 'title', 'text', 'slug'],
+  created() {
+    console.log('box created', this.props)
+  },
 }
 </script>
 
